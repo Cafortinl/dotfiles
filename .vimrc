@@ -10,10 +10,6 @@
 set number
 set relativenumber
 
-" highlighting cursor line and column
-set cursorline
-set cursorcolumn
-
 " enabling syntax highlighting
 syntax on
 
@@ -44,6 +40,9 @@ set expandtab
 
 " setting automatic indentation
 set autoindent
+
+" disabling line wrap
+set nowrap
 
 " showing incomplete commands
 set showcmd
@@ -143,3 +142,17 @@ nnoremap <space>l <c-w>l
 
 " terminal remaps
 tnoremap <esc> <c-\><c-n>
+
+" function to make active window more noticeable
+augroup LineHighlighting
+    autocmd!
+    " highlighting cursor line and column
+    autocmd WinEnter * set cursorline
+    autocmd WinEnter * set cursorcolumn
+    autocmd WinEnter * set colorcolumn=80
+
+    " removing highlighting
+    autocmd WinLeave * set nocursorline
+    autocmd WinLeave * set nocursorcolumn
+    autocmd WinLeave * set colorcolumn=0
+augroup END
