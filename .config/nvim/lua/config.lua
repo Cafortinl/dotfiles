@@ -17,6 +17,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 -- Enabling LSPs
+vim.lsp.enable('csharp_ls')
 vim.lsp.enable('clangd')
 vim.lsp.enable('jdtls')
 vim.lsp.enable('pylsp')
