@@ -140,6 +140,9 @@ nnoremap <space>j <c-w>j
 nnoremap <space>k <c-w>k 
 nnoremap <space>l <c-w>l 
 
+" yanking text to system clipboard
+vnoremap cp "*y
+
 " terminal remaps
 tnoremap <esc> <c-\><c-n>
 
