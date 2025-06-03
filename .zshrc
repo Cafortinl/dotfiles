@@ -23,6 +23,10 @@ precmd() {
 setopt prompt_subst
 PROMPT='%F{#337CA0}%n%f@%F{#D4D2D5}%m%f %F{#8F98BA}%1~%f ${vcs_info_msg_0_}%% '
 
+# Setting up the default text editor
+export EDITOR="$(which nvim)"
+export VISUAL="$(which nvim)"
+
 # dotfiles versioning command
 # More information: https://www.atlassian.com/git/tutorials/dotfiles
 alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'

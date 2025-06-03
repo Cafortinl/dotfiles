@@ -53,6 +53,7 @@ set showmatch
 " setting search options
 set incsearch
 set hlsearch
+set smartcase
 nnoremap <leader><space> :nohlsearch<CR>
 
 " redrawing only when needed
@@ -141,7 +142,7 @@ nnoremap <space>k <c-w>k
 nnoremap <space>l <c-w>l 
 
 " yanking text to system clipboard
-vnoremap cp "*y
+vnoremap cp "+y
 
 " terminal remaps
 tnoremap <esc> <c-\><c-n>
