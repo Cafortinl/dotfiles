@@ -53,6 +53,7 @@ set showmatch
 " setting search options
 set incsearch
 set hlsearch
+set ignorecase
 set smartcase
 nnoremap <leader><space> :nohlsearch<CR>
 
