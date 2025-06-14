@@ -95,9 +95,9 @@ set statusline+=\ %f
 set statusline+=\ %m\ 
 set statusline+=%=
 set statusline+=%y 
-set statusline+=\ %#ColorColumn#
+set statusline+=\ %#IncSearch#
 set statusline+=\ %l,%c
-set statusline+=\ %#QuickFixLine#
+set statusline+=\ %#DiffText#
 set statusline+=\ %p%%\ 
 
 " enabling omnifunc
@@ -161,3 +161,6 @@ augroup LineHighlighting
     autocmd WinLeave * set nocursorcolumn
     autocmd WinLeave * set colorcolumn=0
 augroup END
+
+" colorscheme
+colorscheme gruvbox 
