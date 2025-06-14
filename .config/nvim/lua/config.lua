@@ -1,26 +1,22 @@
 -- LSP configuration
 vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
-    if client.server_capabilities.hoverProvider then
-      vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
-      vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, bufopts)
-      vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, opts)
-      vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
-      vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
-      vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, opts)
-    end
-  end,
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client.server_capabilities.hoverProvider then
+          vim.keymap.set('n', 'K', vim.lsp.buf.hover, { buffer = args.buf })
+        end
+        vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
+        vim.keymap.set("n", "gI", vim.lsp.buf.implementation, opts)
+        vim.keymap.set("n", "<C-]>", vim.lsp.buf.definition, opts)
+        vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+        vim.keymap.set("n", "<Leader>rn", vim.lsp.buf.rename, opts)
+        vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
+        vim.keymap.set("n", "<Leader>ca", vim.lsp.buf.code_action, opts)
+        vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, opts)
+        vim.keymap.set("n", "]d", vim.diagnostic.goto_next, opts)
+        vim.keymap.set("n", "<space>e", vim.diagnostic.open_float, opts)
+    end,
 })
-
--- Set up lspconfig.
-local capabilities = require('cmp_nvim_lsp').default_capabilities()
-
--- Enabling LSPs
-vim.lsp.enable('clangd')
-vim.lsp.enable('jdtls')
-vim.lsp.enable('pylsp')
-vim.lsp.enable('ts_ls')
 
 -- Autocomplete configuration
 local cmp = require'cmp'
@@ -40,15 +36,14 @@ cmp.setup({
       documentation = cmp.config.window.bordered(),
   },
   mapping = cmp.mapping.preset.insert({
-    ['<C-k>'] = cmp.mapping.select_prev_item(),
     ['<C-j>'] = cmp.mapping.select_next_item(),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<Tab>'] = cmp.mapping.confirm({ select = true}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
     { name = 'vsnip' }, -- For vsnip users.
+    { name = 'nvim_lsp' },
     -- { name = 'luasnip' }, -- For luasnip users.
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = 'snippy' }, -- For snippy users.
@@ -82,6 +77,21 @@ cmp.setup.cmdline(':', {
   }, {
     { name = 'cmdline' }
   })
+})
+
+-- Set up lspconfig.
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- Enabling LSPs
+vim.lsp.enable('csharp_ls')
+vim.lsp.enable('clangd')
+vim.lsp.enable('jdtls')
+vim.lsp.enable('pylsp')
+vim.lsp.enable('ts_ls')
+
+-- Custom LSP configurations
+vim.lsp.config('csharp_ls', {
+    capabilities = capabilities
 })
 
 -- Telescope configuration
