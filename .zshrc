@@ -9,8 +9,8 @@ zstyle ':vcs_info:*' enable git svn
 zstyle ':vcs_info:*' check-for-changes true 
 zstyle ':vcs_info:*' unstagedstr ' *'
 zstyle ':vcs_info:*' stagedstr ' +'
-# zstyle ':vcs_info:*' formats '(%F{#F6F740}%b%f%u%c) '
-zstyle ':vcs_info:*' formats '(%b%a%u%c) '
+zstyle ':vcs_info:*' formats '(%F{#F6F740}%b%f%u%c) '
+#zstyle ':vcs_info:*' formats '(%b%a%u%c) '
 # Loading it before the prompt
 precmd() {
     vcs_info 
@@ -33,3 +33,10 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # Hooking direnv
 eval "$(direnv hook zsh)"
+
+# Adding homebrew installed C/C++ Libraries
+export CPATH=/opt/homebrew/include
+export LIBRARY_PATH=/opt/homebrew/lib
+
+# Fixing C-R issues
+bindkey "^R" history-incremental-search-backward
