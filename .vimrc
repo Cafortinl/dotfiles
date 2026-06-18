@@ -63,7 +63,7 @@ endfunction
 
 function! CreateBranchStr()
 	let l:currentBranch = GetCurrentBranch()
-	return strlen(currentBranch) > 0 ? "  ".l:currentBranch.' ' : ''
+	return strlen(currentBranch) > 0 ? "  ".l:currentBranch.' ' : ''
 endfunction
 
 " setting branch info
