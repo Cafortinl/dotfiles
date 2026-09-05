@@ -34,9 +34,18 @@ alias config='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # Hooking direnv
 eval "$(direnv hook zsh)"
 
-# Adding homebrew installed C/C++ Libraries
-export CPATH=/opt/homebrew/include
-export LIBRARY_PATH=/opt/homebrew/lib
+# Adding C/C++ library paths based on whichever package manager is present
+if command -v brew &>/dev/null; then
+    _prefix="$(brew --prefix)"
+elif command -v port &>/dev/null; then
+    _prefix="/opt/local"
+fi
+
+if [[ -n "$_prefix" ]]; then
+    export CPATH="$_prefix/include:$CPATH"
+    export LIBRARY_PATH="$_prefix/lib:$LIBRARY_PATH"
+fi
+unset _prefix
 
 # Fixing C-R issues
 bindkey "^R" history-incremental-search-backward
